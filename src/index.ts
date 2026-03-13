@@ -15,13 +15,17 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Configurar CORS
-const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+const allowedOrigins = [
+  'http://localhost:5173', 
+  'http://127.0.0.1:5173',
+  'https://nitido-front.vercel.app' // Cambia esto por tu dominio real de producción
+];
 app.use(cors({
   origin: function (origin, callback) {
     // Permitir solicitudes sin origen (como las que vienen de herramientas como Postman)
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
       callback(null, true);
     } else {
       callback(new Error('No permitido por CORS'));
@@ -48,6 +52,11 @@ app.use(notFoundHandler);
 // Middleware de manejo de errores general
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
+
+export default app;
+
