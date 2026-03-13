@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 const allowedOrigins = [
   'http://localhost:5173', 
   'http://127.0.0.1:5173',
-  'https://receipts-nitido.vercel.app/' // Cambia esto por tu dominio real de producción
+  'https://receipts-nitido.vercel.app' // Cambia esto por tu dominio real de producción
 ];
 app.use(cors({
   origin: function (origin, callback) {
