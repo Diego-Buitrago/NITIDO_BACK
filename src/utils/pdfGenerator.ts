@@ -182,15 +182,16 @@ export const generateReceiptPDFBuffer = async (data: ReceiptPDFData): Promise<Bu
                         stack: [
                             { text: 'Pago', style: 'sectionTitle' },
                             {
-                                table: {
-                                    widths: ['auto', '*'],
-                                    body: [
-                                        [{ text: 'Método de pago:', style: 'label' }, { text: data.paymentMethod, style: 'value' }],
-                                        ...(data.notes ? [[{ text: 'Observaciones:', style: 'label' }, { text: data.notes, style: 'value' }]] : []),
-                                    ],
-                                },
-                                layout: 'noBorders',
+                                columns: [
+                                    { text: 'Método de pago:', style: 'label', width: 85 },
+                                    { text: data.paymentMethod, style: 'value' },
+                                ],
+                                margin: [0, 0, 0, 5] as [number, number, number, number],
                             },
+                            ...(data.notes ? [
+                                { text: 'Observaciones:', style: 'label' },
+                                { text: data.notes, style: 'value', margin: [0, 3, 0, 0] as [number, number, number, number] },   
+                            ] : []),
                         ],
                     },
                     {

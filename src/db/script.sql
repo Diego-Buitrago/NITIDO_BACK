@@ -137,7 +137,7 @@ CREATE TABLE sales.receipts (
     discount DECIMAL(10, 2) DEFAULT 0.00,
     tax DECIMAL(10, 2) DEFAULT 0.00,
     total DECIMAL(10, 2) DEFAULT 0.00,
-    observation VARCHAR(100),
+    observation TEXT,
     fk_rec_state_id INT DEFAULT 1,
     register_user INT,
     register_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
